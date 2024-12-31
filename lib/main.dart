@@ -1,3 +1,4 @@
+import 'package:firebase/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +14,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hfsdffsdfssello fas!', style: TextStyle(fontSize: 23)),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: Login(),
     );
   }
 }
