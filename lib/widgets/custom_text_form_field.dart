@@ -6,7 +6,9 @@ class CustomTextFormField extends StatelessWidget {
   final String labelText;
   Icon prefixIcon;
   Icon suffixIcon;
+  TextEditingController controller;
   CustomTextFormField({
+    required this.controller,
     required this.prefixIcon,
     required this.suffixIcon,
     required this.labelText,
@@ -16,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(color: Colors.black),
