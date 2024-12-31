@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase/widgets/custom_button.dart';
 import 'package:firebase/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -61,7 +62,6 @@ class _LoginState extends State<Login> {
               ),
               Gap(10),
               //* password text field
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
                 child: CustomTextFormField(
@@ -70,8 +70,32 @@ class _LoginState extends State<Login> {
                   labelText: "Password",
                 ),
               ),
+              Gap(15),
+              //* sign in button
+              CustomButton(),
+              Gap(19),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Not A Member ? ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  Text(
+                    "Register Now",
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+              )
             ],
-            //* sign in button
+
             //* not a memeber register Now
           ),
         ),
