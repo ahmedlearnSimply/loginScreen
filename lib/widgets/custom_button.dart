@@ -8,9 +8,10 @@ class CustomButton extends StatelessWidget {
 
   CustomButton({
     required this.onTap,
+    this.text = "",
     super.key,
   });
-
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +27,7 @@ class CustomButton extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              "Sign in",
+              text,
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,

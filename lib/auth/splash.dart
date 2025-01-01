@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase/auth/auth_page.dart';
 import 'package:firebase/screens/home_page.dart';
 import 'package:firebase/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +20,7 @@ class Spalsh extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            return Login();
+            return AuthPage();
           }
         },
       ),

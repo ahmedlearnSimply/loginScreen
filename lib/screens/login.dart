@@ -3,13 +3,16 @@
 import 'package:firebase/widgets/custom_button.dart';
 import 'package:firebase/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  final VoidCallback showRegisterPage;
+  const Login({
+    super.key,
+    required this.showRegisterPage,
+  });
 
   @override
   State<Login> createState() => _LoginState();
@@ -96,6 +99,7 @@ class _LoginState extends State<Login> {
               Gap(15),
               //* sign in button
               CustomButton(
+                text: "Sign In",
                 onTap: signIn,
               ),
               Gap(19),
@@ -109,12 +113,14 @@ class _LoginState extends State<Login> {
                       color: Colors.grey[800],
                     ),
                   ),
-                  Text(
-                    "Register Now",
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                  GestureDetector(
+                    onTap: widget.showRegisterPage,
+                    child: Text(
+                      "Register Now",
+                      style: TextStyle(
+                        fontSize: 19,
+                        color: Colors.blue,
+                      ),
                     ),
                   ),
                 ],
