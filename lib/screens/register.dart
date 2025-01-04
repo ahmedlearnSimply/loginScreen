@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/widgets/custom_button.dart';
 import 'package:firebase/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,8 +24,11 @@ class _LoginState extends State<Register> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmedPasswordController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
-//* sign in to check if
+//* sign Up to check if
   Future signUp() async {
     if (passwordConfirmed()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -32,6 +36,26 @@ class _LoginState extends State<Register> {
         password: passwordController.text.trim(),
       );
     }
+    getUserData(
+      firstNameController.text.trim(),
+      lastNameController.text.trim(),
+      emailController.text.trim(),
+      int.parse(ageController.text.trim()),
+    );
+  }
+
+  Future getUserData(
+    String firstName,
+    String lastName,
+    String email,
+    int age,
+  ) async {
+    await FirebaseFirestore.instance.collection('user').add({
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'age': age
+    });
   }
 
   bool passwordConfirmed() {
@@ -61,16 +85,9 @@ class _LoginState extends State<Register> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Gap(100),
+              Gap(80),
               //* logo for the app
 
-              Center(
-                child: Icon(
-                  Icons.android,
-                  size: 100,
-                ),
-              ),
-              Gap(10),
               //* name of App
               Text(
                 "Hello There!",
@@ -88,15 +105,46 @@ class _LoginState extends State<Register> {
                 ),
               ),
               Gap(40),
-              //* email text field
-
+              //* Firstname text field
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: CustomTextFormField(
+                  controller: firstNameController,
+                  prefixIcon: Icon(Icons.person),
+                  suffixIcon: Icon(Icons.clear),
+                  labelText: "First Name",
+                ),
+              ),
+              Gap(10),
+              //* LastName text field
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: CustomTextFormField(
+                  controller: lastNameController,
+                  prefixIcon: Icon(Icons.person_4),
+                  suffixIcon: Icon(Icons.clear),
+                  labelText: "Last Name",
+                ),
+              ),
+              Gap(10),
+              //* age Text Field
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: CustomTextFormField(
+                  controller: ageController,
+                  prefixIcon: Icon(Icons.apps_outage_sharp),
+                  suffixIcon: Icon(Icons.clear),
+                  labelText: "Age",
+                ),
+              ),
+              Gap(10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
                 child: CustomTextFormField(
                   controller: emailController,
                   prefixIcon: Icon(Icons.email),
                   suffixIcon: Icon(Icons.clear),
-                  labelText: "Email",
+                  labelText: "email",
                 ),
               ),
               Gap(10),
