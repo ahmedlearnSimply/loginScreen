@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase/screens/ForgetPasswordPage.dart';
 import 'package:firebase/widgets/custom_button.dart';
 import 'package:firebase/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,8 +97,37 @@ class _LoginState extends State<Login> {
                   labelText: "Password",
                 ),
               ),
-              Gap(15),
+              Gap(5),
               //* sign in button
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ForgetPasswordPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Forgot Password? ",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Gap(10),
+
               CustomButton(
                 text: "Sign In",
                 onTap: signIn,
