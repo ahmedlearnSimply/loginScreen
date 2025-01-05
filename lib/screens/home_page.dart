@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase/readData/get_user_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -24,40 +25,63 @@ class _HomePageState extends State<HomePage> {
   Future getDocIDs() async {
     await FirebaseFirestore.instance.collection('user').get().then(
           (snapshot) => snapshot.docs.forEach((document) {
-            print(document.reference);
             docIDs.add(document.reference.id);
           }),
         );
   }
 
   @override
-  void initState() {
-    getDocIDs();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              icon: Icon(
+                Icons.exit_to_app,
+              ),
+              color: Colors.white,
+            ),
+          )
+        ],
+        backgroundColor: Colors.deepPurple,
+        title: Text(
+          user.email!,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Gap(20),
           Center(
             child: Text(
-              'Welcome to the Home Page ' + user.email!,
+              'Welcome to the Home Page ',
+              style: TextStyle(fontSize: 24),
             ),
           ),
+          Expanded(
+            child: FutureBuilder(
+                future: getDocIDs(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: docIDs.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: GetUserName(documentId: docIDs[index]),
+                      );
+                    },
+                  );
+                }),
+          ),
           Gap(20),
-          MaterialButton(
-            color: Colors.black,
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-            child: Text(
-              'Log Out',
-              style: TextStyle(color: Colors.white),
-            ),
-          )
         ],
       ),
     );
