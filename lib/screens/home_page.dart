@@ -60,13 +60,14 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Gap(20),
+          Gap(30),
           Center(
             child: Text(
               'Welcome to the Home Page ',
               style: TextStyle(fontSize: 24),
             ),
           ),
+          Gap(15),
           Expanded(
             child: FutureBuilder(
                 future: getDocIDs(),
@@ -74,8 +75,17 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     itemCount: docIDs.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: GetUserName(documentId: docIDs[index]),
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            tileColor: Colors.deepPurple[100],
+                            title: GetUserName(documentId: docIDs[index]),
+                          ),
+                        ),
                       );
                     },
                   );
