@@ -85,7 +85,7 @@ class _LoginState extends State<Register> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Gap(80),
+              Gap(40),
               //* logo for the app
 
               //* name of App
@@ -180,7 +180,7 @@ class _LoginState extends State<Register> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Not A Member ? ",
+                    "You \'ve an account ? ",
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[800],
@@ -189,7 +189,7 @@ class _LoginState extends State<Register> {
                   GestureDetector(
                     onTap: widget.showLoginPage,
                     child: Text(
-                      "Register Now",
+                      "Login Now",
                       style: TextStyle(
                         fontSize: 19,
                         color: Colors.blue,
