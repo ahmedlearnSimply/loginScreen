@@ -23,7 +23,14 @@ class _HomePageState extends State<HomePage> {
 
   //* get docIDs
   Future getDocIDs() async {
-    await FirebaseFirestore.instance.collection('user').get().then(
+    await FirebaseFirestore.instance
+        .collection('user')
+        .orderBy(
+          'age',
+          descending: true,
+        )
+        .get()
+        .then(
           (snapshot) => snapshot.docs.forEach((document) {
             docIDs.add(document.reference.id);
           }),
